@@ -1,0 +1,7 @@
+image_manifest_digest=sha256:e5c217c74be63601239bfa718a66fb550f8c7181c006169ce5416157561a6edc
+config_digest=sha256:34d60ccc3622d5c9c3332a4d3dcd25980d1790868123c5bb97080a24a4a802de
+tag=readystack/nats:v2.15.3-CE-ubuntu24.04-r4
+probe_port=8222
+probe_path=/healthz
+probe_timeout=180
+verify_secret=NATS_PASSWORD

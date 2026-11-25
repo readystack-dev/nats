@@ -1,0 +1,41 @@
+{
+  "bases": [
+    {
+      "digest": "sha256:fb7cceb528b47141eccd9b60bf3cbd27d5ef5f8cf5b7d338bec866da495b50dc",
+      "layout": "bases/golang_1.27.4-bookworm_4fa7c968ba93.oci",
+      "ref": "golang:1.27.4-bookworm@sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea"
+    },
+    {
+      "digest": "sha256:9a04f13b3f80ef056361e30868593b1cfd2279fe19e4081cb93a90bf56819d6a",
+      "layout": "bases/ubuntu_24.04_9c7f200c07e3.oci",
+      "ref": "ubuntu:24.04@sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289"
+    }
+  ],
+  "engine": {
+    "archive": "toolchain/buildkit.tar",
+    "image_digest": "sha256:e0e67ea9c4bb07bdef683e29f70f3b623d1eb9c82274a9ec04e6bb0511449fb0",
+    "kind": "buildkit",
+    "tag": "moby/buildkit:v0.31.2"
+  },
+  "inputs": {
+    "context": ".",
+    "dockerfile": "Dockerfile.offline.pinned",
+    "mtime_policy": "clamp",
+    "source_date_epoch": 1795161145,
+    "tree_hash": "sha256:4e93b61a8823ff97c9a3c511e7fcc4c94ef85c2b41aa433d5a030edc9fb4b143"
+  },
+  "probe": {
+    "http_path": "/healthz",
+    "port": 8222,
+    "secrets": [
+      "NATS_PASSWORD"
+    ],
+    "timeout_s": 180
+  },
+  "schema": "readystack-rebuild-bundle/v0.1",
+  "subject": {
+    "config_digest": "sha256:34d60ccc3622d5c9c3332a4d3dcd25980d1790868123c5bb97080a24a4a802de",
+    "image_manifest_digest": "sha256:e5c217c74be63601239bfa718a66fb550f8c7181c006169ce5416157561a6edc",
+    "name": "docker.io/readystack/nats:v2.15.3-CE-ubuntu24.04-r4"
+  }
+}

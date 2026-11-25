@@ -1,0 +1,9 @@
+{
+  "schema": "kitforge.source_tree_hash.v1",
+  "slug": "nats",
+  "repo": "https://github.com/nats-io/nats-server",
+  "ref": "v2.15.3",
+  "commit": "2a9066eb57ff4aa50d8e6a979bdfbd6a8b9db251",
+  "tree_listing_sha256": "5b9cc2ec65654263c7b6900c150bd7fcbc5496b880f245a3d82459e96b491718",
+  "file_count": 598
+}

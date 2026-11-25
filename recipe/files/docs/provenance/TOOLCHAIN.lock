@@ -1,0 +1,74 @@
+{
+  "apt_refresh": [
+    {
+      "min_version": "2.39-0ubuntu8.12",
+      "package": "libc6",
+      "reason": "UBUNTU-CVE-2026-84243: libc6 2.39-0ubuntu8.9 -> 2.39-0ubuntu8.12"
+    }
+  ],
+  "binaries_from_component_images": [],
+  "binaries_from_source": [
+    {
+      "build_flags": [
+        "-trimpath"
+      ],
+      "build_tags": [],
+      "cgo_enabled": 0,
+      "ldflags": "-w -X github.com/nats-io/nats-server/v2/server.gitCommit=@COMMIT:7@ -X github.com/nats-io/nats-server/v2/server.serverVersion=@VERSION@",
+      "main_pkg": ".",
+      "name": "nats-server",
+      "out_path": "/usr/bin/nats-server",
+      "verify_contains": "nats-server: @VERSION@",
+      "verify_subcmd": "--version"
+    }
+  ],
+  "build_method": "source-rebuild-go",
+  "chain_id": 1133,
+  "dep_bumps": [],
+  "expected_residuals": [],
+  "images": [
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "builder"
+    },
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "offline_builder"
+    },
+    {
+      "digest": "sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289",
+      "ref": "ubuntu:24.04",
+      "role": "base"
+    }
+  ],
+  "mod_replaces": [],
+  "runtime_base": {
+    "kind": "chisel",
+    "shell": true,
+    "tools": [
+      "sed",
+      "tar"
+    ]
+  },
+  "schema": "kitforge.toolchain_lock.v1",
+  "slug": "nats",
+  "source": {
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOTOOLCHAIN": "local"
+    },
+    "builder_image": "golang:1.27.4-bookworm",
+    "commit": "2a9066eb57ff4aa50d8e6a979bdfbd6a8b9db251",
+    "commit_epoch": 1794395373,
+    "go_module_root": "github.com/nats-io/nats-server/v2",
+    "go_version_required": "1.26.0",
+    "ref": "v2.15.3",
+    "repo": "https://github.com/nats-io/nats-server",
+    "source_date_epoch": 1795161145,
+    "source_date_epoch_basis": "release-cut",
+    "source_date_epoch_provenance": "the time release v2.15.3-CE-ubuntu24.04-r4 was cut (2026-11-20T07:52:25Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit 2a9066eb57ff, dated 2026-11-11T11:09:33Z (source.commit_epoch)."
+  },
+  "version": "v2.15.3"
+}

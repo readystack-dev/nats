@@ -1,0 +1,66 @@
+{
+  "schema": "kitforge.build_recipe.v1",
+  "slug": "nats",
+  "image": "readystack/nats:v2.15.3-CE-ubuntu24.04-r4",
+  "build_method": "source-rebuild-go",
+  "source": {
+    "repo": "https://github.com/nats-io/nats-server",
+    "ref": "v2.15.3",
+    "builder_image": "golang:1.27.4-bookworm",
+    "go_module_root": "github.com/nats-io/nats-server/v2",
+    "go_version_required": "1.26.0",
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOTOOLCHAIN": "local"
+    },
+    "_version_note": "v2.15.1 is the latest GA (2026-10-09). go.mod declares `go 1.26.0` and `toolchain go1.26.8`; upstream's .goreleaser.yml builds its releases with GOTOOLCHAIN=go1.27.2 and its v2.15.1 release binary reports go1.27.2, so the builder is golang:1.27.3-bookworm, the latest patch of the line upstream releases with. Under GOTOOLCHAIN=local a toolchain directive older than the local Go is satisfied. No go.work. 2026-10-27, v2.15.2 (2026-10-26): go.mod still declares `go 1.26.0`, now with `toolchain go1.26.10`, and upstream's .goreleaser.yml builds it with GOTOOLCHAIN=go1.27.3, the builder's Go.",
+    "_vendor_note": "vendor/ is NOT committed (eleven direct modules), so the vendor stage runs `go mod tidy -e && go mod vendor`.",
+    "_build_note": "Upstream's release build (.goreleaser.yml): CGO_ENABLED=0, -trimpath, ldflags `-w -X server.gitCommit={{.ShortCommit}} -X server.serverVersion={{.Tag}}`. server/const.go also fills gitCommit from the Go build's vcs.revision (7 characters); this build's tree has no .git, so the commit is stamped.",
+    "commit": "2a9066eb57ff4aa50d8e6a979bdfbd6a8b9db251",
+    "source_date_epoch": 1795161145,
+    "source_date_epoch_provenance": "the time release v2.15.3-CE-ubuntu24.04-r4 was cut (2026-11-20T07:52:25Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit 2a9066eb57ff, dated 2026-11-11T11:09:33Z (source.commit_epoch).",
+    "commit_epoch": 1794395373,
+    "source_date_epoch_basis": "release-cut"
+  },
+  "binaries_from_source": [
+    {
+      "name": "nats-server",
+      "main_pkg": ".",
+      "cgo_enabled": 0,
+      "build_tags": [],
+      "build_flags": [
+        "-trimpath"
+      ],
+      "ldflags": "-w -X github.com/nats-io/nats-server/v2/server.gitCommit=@COMMIT:7@ -X github.com/nats-io/nats-server/v2/server.serverVersion=@VERSION@",
+      "out_path": "/usr/bin/nats-server",
+      "verify_subcmd": "--version",
+      "verify_contains": "nats-server: @VERSION@",
+      "_note": "Upstream's release ldflags exactly (-w without -s keeps the symbol table, as upstream's binaries do). serverVersion is the tag with its leading v, so `nats-server --version` prints `nats-server: v2.15.1`, as upstream's release binary does; /varz reports the bare VERSION constant (2.15.1) and git_commit (7 characters, b2fd3ef in upstream's binary)."
+    }
+  ],
+  "runtime_packages": [
+    "base-files",
+    "base-passwd",
+    "ca-certificates",
+    "coreutils",
+    "dash",
+    "libacl1",
+    "libc6",
+    "libpcre2-8-0",
+    "libselinux1",
+    "libssl3t64",
+    "openssl",
+    "sed",
+    "tar",
+    "tzdata"
+  ],
+  "runtime_base": {
+    "kind": "chisel",
+    "shell": true,
+    "tools": [
+      "sed",
+      "tar"
+    ],
+    "packages": "vendored/chisel/packages.tsv"
+  }
+}
